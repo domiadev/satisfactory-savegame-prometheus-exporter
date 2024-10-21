@@ -29,3 +29,9 @@ With Docker Compose:
       - grafana
     hostname: satisfactory-savegame-metrics
 ```
+
+## Related
+
+- [wolveix/satisfactory-server](https://github.com/wolveix/satisfactory-server) - A Docker image for running a Satisfactory Dedicated Server.
+- [Shinigami92/satisfactory-server-prometheus-exporter](https://github.com/Shinigami92/satisfactory-server-prometheus-exporter) - Prometheus Exporter for the metrics exposed from the Satisfactory Dedicated Server
+- [etothepii4/satisfactory-file-parser](https://github.com/etothepii4/satisfactory-file-parser) - TypeScript Module to parse Satisfactory save files
