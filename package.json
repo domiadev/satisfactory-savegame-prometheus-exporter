@@ -1,0 +1,37 @@
+{
+  "name": "satisfactory-savegame-prometheus-exporter",
+  "version": "0.0.0",
+  "description": "A Prometheus exporter for savegame metrics from Satisfactory",
+  "bin": {
+    "cli": "./dist/cli.js",
+    "express": "./dist/express.js"
+  },
+  "files": [
+    "dist/*.js",
+    "dist/**/*.js"
+  ],
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "esbuild --bundle --platform=node --packages=external --outdir=./dist/ ./bin/*.ts",
+    "test": "eslint src/ && tsc --noEmit && npm run build"
+  },
+  "keywords": [
+    "satisfactory",
+    "prometheus",
+    "metrics"
+  ],
+  "author": "Joakim Hedlund <contact@joakimhedlund.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@sleavely/eslint-config": "^1.0.1",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.7.7",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@etothepii/satisfactory-file-parser": "^1.1.1",
+    "express": "^4.21.1",
+    "prom-client": "^15.1.3"
+  }
+}
