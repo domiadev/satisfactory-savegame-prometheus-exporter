@@ -2,7 +2,10 @@
 
 ## Usage
 
-While you can run the `bin` scripts with `npm exec cli` or `npm exec express`, we recommend the Docker approach:
+
+The `SAVEGAME_LOCATION` environment variable can be a URL or a local path to a file or a folder. If a folder is supplied, it will recursively find the latest file.
+
+While you can run the `bin` scripts with `npm exec cli <savegamelocation>` or `npm exec express <savegamelocation>`, the recommended approach is to use Docker as shown below.
 
 ```sh
 docker build -t satisfactory-savegame-prometheus-exporter .
