@@ -2,6 +2,16 @@
   "name": "satisfactory-savegame-prometheus-exporter",
   "version": "0.0.0",
   "description": "A Prometheus exporter for savegame metrics from Satisfactory",
+  "author": "Joakim Hedlund <contact@joakimhedlund.com>",
+  "license": "MIT",
+  "keywords": [
+    "satisfactory",
+    "prometheus",
+    "prometheus-exporter",
+    "metrics"
+  ],
+  "homepage": "https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter",
+  "repository": "github:Sleavely/satisfactory-savegame-prometheus-exporter",
   "bin": {
     "cli": "./dist/cli.js",
     "express": "./dist/express.js"
@@ -15,13 +25,6 @@
     "build": "esbuild --bundle --platform=node --packages=external --outdir=./dist/ ./bin/*.ts",
     "test": "eslint src/ && tsc --noEmit && npm run build"
   },
-  "keywords": [
-    "satisfactory",
-    "prometheus",
-    "metrics"
-  ],
-  "author": "Joakim Hedlund <contact@joakimhedlund.com>",
-  "license": "MIT",
   "devDependencies": {
     "@sleavely/eslint-config": "^1.0.1",
     "@types/express": "^4.17.21",

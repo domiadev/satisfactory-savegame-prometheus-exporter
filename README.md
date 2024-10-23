@@ -1,7 +1,11 @@
 # satisfactory-savegame-prometheus-exporter
 
-## Usage
+A Prometheus Exporter that generates metrics from local or remote Satisfactory save game files.
 
+[ ![npm version](https://img.shields.io/npm/v/satisfactory-savegame-prometheus-exporter.svg?style=flat) ](https://npmjs.org/package/satisfactory-savegame-prometheus-exporter "View this project on npm") [ ![Docker Image Version](https://img.shields.io/docker/v/sleavely/satisfactory-savegame-prometheus-exporter)
+](https://hub.docker.com/r/sleavely/satisfactory-savegame-prometheus-exporter) [ ![Issues](https://img.shields.io/github/issues/Sleavely/satisfactory-savegame-prometheus-exporter.svg) ](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/issues)
+
+## Usage
 
 The `SAVEGAME_LOCATION` environment variable can be a URL or a local path to a file or a folder. If a folder is supplied, it will recursively find the latest file.
 
