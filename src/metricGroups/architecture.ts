@@ -1,5 +1,6 @@
-import { isBuildableSubsystemSpecialProperties, type SaveComponent, type SaveEntity } from '@etothepii/satisfactory-file-parser'
 import { MetricGroup } from './_MetricGroup'
+import { type Lookups } from '../types/lookups.type'
+import { isBuildableSubsystemSpecialProperties, type SaveComponent, type SaveEntity } from '@etothepii/satisfactory-file-parser'
 
 const metrics = new MetricGroup('satisfactory_savegame_architecture')
   .addGauge(
@@ -32,7 +33,7 @@ const metrics = new MetricGroup('satisfactory_savegame_architecture')
   )
 
 /* eslint-disable no-useless-return */
-export const parser = (object: SaveComponent | SaveEntity): void => {
+export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): void => {
   if (object.typePath === '/Script/FactoryGame.FGLightweightBuildableSubsystem') {
     if (!isBuildableSubsystemSpecialProperties(object?.specialProperties)) return
 

@@ -1,5 +1,7 @@
 import {
   Parser,
+  type SaveComponent,
+  type SaveEntity,
 } from '@etothepii/satisfactory-file-parser'
 import { Registry } from 'prom-client'
 import { architectureMetrics, architectureParser } from './metricGroups/architecture'
@@ -25,15 +27,28 @@ export const extractMetrics = async (arrayBuffer: ArrayBuffer): Promise<Registry
   const save = Parser.ParseSave('MySave', new Uint8Array(arrayBuffer))
   register.setDefaultLabels({ sessionName: save.header.sessionName })
 
+  const lookups = {
+    byType: new Map<string, SaveComponent | SaveEntity>(),
+    byInstance: new Map<string, SaveComponent | SaveEntity>(),
+  } as const
+
+  // Build lookup maps in an initial pass
   for (const level of save.levels) {
     for (const object of level.objects) {
-      architectureParser(object)
-      awesomeParser(object)
-      buildingsParser(object)
-      conveyorsParser(object)
-      pipesParser(object)
-      powerParser(object)
-      transportsParser(object)
+      lookups.byType.set(object.typePath, object)
+      lookups.byInstance.set(object.instanceName, object)
+    }
+  }
+
+  for (const level of save.levels) {
+    for (const object of level.objects) {
+      architectureParser(object, lookups)
+      awesomeParser(object, lookups)
+      buildingsParser(object, lookups)
+      conveyorsParser(object, lookups)
+      pipesParser(object, lookups)
+      powerParser(object, lookups)
+      transportsParser(object, lookups)
 
       // if (object.properties?.mExtractableResource && object.typePath.includes('Miner')) {}
       // miner equivalent, should have mExtractableResource

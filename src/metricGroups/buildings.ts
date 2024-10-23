@@ -1,3 +1,4 @@
+import { type Lookups } from '../types/lookups.type'
 import { MetricGroup } from './_MetricGroup'
 import {
   type SaveComponent,
@@ -34,7 +35,7 @@ const metrics = new MetricGroup('satisfactory_savegame_buildings')
   )
 
 /* eslint-disable no-useless-return */
-export const parser = (object: SaveComponent | SaveEntity): void => {
+export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): void => {
   // Miners
   if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/Miner')) {
     // Miner MK1 is all caps but Mk2 and Mk3 are mixed case

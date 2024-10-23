@@ -1,4 +1,5 @@
 import { MetricGroup } from './_MetricGroup'
+import { type Lookups } from '../types/lookups.type'
 import {
   isConveyorChainActorSpecialProperties,
   type SaveComponent,
@@ -13,7 +14,7 @@ const metrics = new MetricGroup('satisfactory_savegame_conveyors')
   )
 
 /* eslint-disable no-useless-return */
-export const parser = (object: SaveComponent | SaveEntity): void => {
+export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): void => {
   if (object.typePath.startsWith('/Script/FactoryGame.FGConveyorChainActor')) {
     const props = object.specialProperties
     if (!isConveyorChainActorSpecialProperties(props)) return

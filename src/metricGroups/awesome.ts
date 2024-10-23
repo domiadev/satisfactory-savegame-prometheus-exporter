@@ -1,4 +1,5 @@
 import { MetricGroup } from './_MetricGroup'
+import { type Lookups } from '../types/lookups.type'
 import {
   type ArrayProperty,
   type Int32Property,
@@ -17,7 +18,7 @@ const metrics = new MetricGroup('satisfactory_savegame_awesome')
   )
 
 /* eslint-disable no-useless-return */
-export const parser = (object: SaveComponent | SaveEntity): void => {
+export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): void => {
   if (object.typePath === '/Script/FactoryGame.FGResourceSinkSubsystem') {
     // Total all-time, split by Standard and DNA
     const mTotalPoints = (object?.properties?.mTotalPoints as ArrayProperty<string>)?.values?.map(s => parseInt(s, 10))

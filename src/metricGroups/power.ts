@@ -1,4 +1,5 @@
 import { MetricGroup } from './_MetricGroup'
+import { type Lookups } from '../types/lookups.type'
 import {
   type FloatProperty,
   type SaveComponent,
@@ -40,7 +41,7 @@ const metrics = new MetricGroup('satisfactory_savegame_power')
   )
 
 /* eslint-disable no-useless-return */
-export const parser = (object: SaveComponent | SaveEntity): void => {
+export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): void => {
   if (object.typePath === '/Script/FactoryGame.FGPowerCircuit') {
     metrics.getGauge('circuits').inc()
 
