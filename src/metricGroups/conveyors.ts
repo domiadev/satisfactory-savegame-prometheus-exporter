@@ -8,31 +8,26 @@ import {
 const metrics = new MetricGroup('satisfactory_savegame_conveyors')
   .addGauge(
     'length',
-    'Total length of conveyor belts in meters',
+    'Total length of conveyor belts & lifts in meters',
+    ['mk'],
   )
 
-let hasPrinted = false
 /* eslint-disable no-useless-return */
 export const parser = (object: SaveComponent | SaveEntity): void => {
   if (object.typePath.startsWith('/Script/FactoryGame.FGConveyorChainActor')) {
     const props = object.specialProperties
     if (!isConveyorChainActorSpecialProperties(props)) return
-    // Measure length
-    const chainLength = props.totalLength
-    if (typeof chainLength === 'number') {
-      metrics.getGauge('length').inc(chainLength / 100)
-    }
 
-    // TODO: record the Mk of the conveyors in the chain
-    if (!hasPrinted && props.beltsInChain.length === 3) {
-      console.log(props)
-      hasPrinted = true
+    // Measure length, grouped by Mk.
+    // FYI beltchains also include lifts
+    for (const beltInChain of props.beltsInChain) {
+      const mk = beltInChain.beltRef.pathName.match(/mk(\d)/i)?.at(1)
+      metrics.getGauge('length').inc({ mk }, (beltInChain.endsAtLength - beltInChain.startsAtLength) / 100)
     }
 
     return
   }
 }
-
 /* eslint-enable no-useless-return */
 
 export {

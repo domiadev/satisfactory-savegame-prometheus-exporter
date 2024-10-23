@@ -35,9 +35,11 @@ export const extractMetrics = async (arrayBuffer: ArrayBuffer): Promise<Registry
       powerParser(object)
       transportsParser(object)
 
-      // if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/OilRefinery')) {}
+      // if (object.properties?.mExtractableResource && object.typePath.includes('Miner')) {}
+      // miner equivalent, should have mExtractableResource
+      // if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/OilPump')) {}
+      // no sure if it has mExtractableResource
       // if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/WaterPump')) {}
-      // if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/OilPump')) {} // miner equivalent
     }
   }
 
