@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import express from 'express'
-import { loadLocation } from '../src/loadLocation'
+import { loadLocation } from '../src/utils/loadLocation'
 import { extractMetrics } from '../src/extractMetrics'
 
 const {

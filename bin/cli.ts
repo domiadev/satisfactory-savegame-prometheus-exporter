@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { extractMetrics } from '../src/extractMetrics'
-import { loadLocation } from '../src/loadLocation'
+import { loadLocation } from '../src/utils/loadLocation'
 
 const {
   /**
