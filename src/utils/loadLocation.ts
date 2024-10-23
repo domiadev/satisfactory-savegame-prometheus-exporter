@@ -1,6 +1,10 @@
 import { readdir, readFile, stat } from 'fs/promises'
 import { resolve } from 'path'
 
+const {
+  LOG_LEVEL = 'info',
+} = process.env
+
 const getLastModifiedFile = async (dir: string, recursive?: boolean, predicateFn?: (file: string) => boolean): Promise<string> => {
   const files = await readdir(dir, { recursive })
   const latestFile = await files.reduce(async (promiseChain, file) => {
@@ -29,7 +33,7 @@ export const loadLocation = async (location: string): Promise<ArrayBuffer> => {
   const pathStat = await stat(localPath)
   if (pathStat.isDirectory()) {
     localPath = await getLastModifiedFile(localPath, true)
-    console.log(`Reading savefile from ${localPath}`)
+    if (LOG_LEVEL === 'debug') console.log(`Reading savefile from ${localPath}`)
   }
 
   return (await readFile(resolve(localPath))).buffer
