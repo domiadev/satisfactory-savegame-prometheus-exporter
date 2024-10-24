@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.0.0](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v1.0.0...v2.0.0) (2024-10-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* Many metrics have been removed and are now generically tracked in `satisfactory_savegame_buildings_total`
+
+### Features
+
+* Many metrics have been removed and are now generically tracked in `satisfactory_savegame_buildings_total` ([bdb5efe](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/bdb5efeaeb9bd90ee03abe91b8d314346c7eaad1))
+* Power production is `satisfactory_savegame_power_production_megawatts` ([bdb5efe](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/bdb5efeaeb9bd90ee03abe91b8d314346c7eaad1))
+* Resource throughput in `satisfactory_savegame_resources_consumption_per_second` and `satisfactory_savegame_resources_production_per_second` ([bdb5efe](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/bdb5efeaeb9bd90ee03abe91b8d314346c7eaad1))
+* Stored MWh in `satisfactory_savegame_power_storage_megawatthours` ([bdb5efe](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/bdb5efeaeb9bd90ee03abe91b8d314346c7eaad1))
+
+
+### Bug Fixes
+
+* When loading from a directory, only filenames ending in `.sav` will be considered. ([bdb5efe](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/bdb5efeaeb9bd90ee03abe91b8d314346c7eaad1))
+
 ## 1.0.0 (2024-10-23)
 
 
