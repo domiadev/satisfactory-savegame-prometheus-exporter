@@ -1,87 +1,88 @@
 import { MetricGroup } from './_MetricGroup'
 import { type Lookups } from '../types/lookups.type'
 import {
+  type BoolProperty,
   type FloatProperty,
   type SaveComponent,
   type SaveEntity,
 } from '@etothepii/satisfactory-file-parser'
+import { pathToBuilding, pathToGenerator } from '../staticData/staticData'
 
 const metrics = new MetricGroup('satisfactory_savegame_power')
   .addGauge(
-    'circuits',
+    'circuits_total',
     'Unique power circuits',
   )
   .addGauge(
-    'powerlines_amount',
-    'Amount of power lines connecting things',
-  )
-  .addGauge(
-    'powerlines_length',
+    'powerlines_meters',
     'Total length of power lines in meters',
   )
   .addGauge(
-    'generators_biomass',
-    'Biomass generators, excluding the HUB',
+    'generators_total',
+    'Power generating buildings, excluding the HUB',
+    ['building'],
   )
   .addGauge(
-    'generators_coal',
-    'Coal plants',
+    'production_megawatts',
+    'World-wide power production in MW',
+    ['building'],
   )
   .addGauge(
-    'generators_fuel',
-    'Fuel plants',
-  )
-  .addGauge(
-    'generators_geo',
-    'Geothermal generators',
-  )
-  .addGauge(
-    'storage',
-    'Power storage buildings',
+    'storage_megawatthours',
+    'Total amount of MWh remaining in all batteries',
   )
 
 /* eslint-disable no-useless-return */
 export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): void => {
-  if (object.typePath === '/Script/FactoryGame.FGPowerCircuit') {
-    metrics.getGauge('circuits').inc()
+  if (object.properties?.mBaseProduction) {
+    // powerInfo belonging to a geyser, i.e. Desc_GeneratorGeoThermal_C
+    const building = pathToBuilding(lookups.byInstance.get(object.parentEntityName)?.typePath ?? '')
+    metrics.getGauge('generators_total').inc({ building: building.name })
+    metrics.getGauge('production_megawatts').inc({ building: building.name }, (object.properties?.mBaseProduction as FloatProperty)?.value)
+  }
+  if (object.properties?.mCurrentFuelClass && !(object.properties?.mIsProductionPaused as BoolProperty)?.value) {
+    // Looks like a generator not in standby
 
-    // TODO: consumption & production metrics in MW?
+    const generator = pathToGenerator(object.typePath)
+    const building = pathToBuilding(object.typePath)
+
+    if (!building) {
+      // Its a vehicle. Or one of the players are drinking fuel.
+      return
+    }
+    metrics.getGauge('generators_total').inc({ building: building.name })
+
+    // Check if the connected powerInfo object has dynamic production
+    const powerInfo = lookups.byInstance.get(`${object.instanceName}.powerInfo`)
+    if (!powerInfo) {
+      throw new Error(`A generator without powerInfo was encountered: ${object.instanceName}`)
+    }
+
+    if ((powerInfo.properties?.mDynamicProductionCapacity as FloatProperty)?.value) {
+      metrics.getGauge('production_megawatts').inc({ building: building.name }, (powerInfo.properties?.mDynamicProductionCapacity as FloatProperty).value)
+    } else {
+      metrics.getGauge('production_megawatts').inc({ building: building.name }, generator.powerProduction)
+    }
+  }
+
+  if (object.typePath === '/Script/FactoryGame.FGPowerCircuit') {
+    metrics.getGauge('circuits_total').inc()
+    return
   }
   if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/PowerLine')) {
-    // Count segments
-    metrics.getGauge('powerlines_amount').inc()
-
     // Measure length
     const mCachedLength = (object?.properties?.mCachedLength as FloatProperty)?.value
     if (typeof mCachedLength === 'number') {
-      metrics.getGauge('powerlines_length').inc(mCachedLength / 100)
+      metrics.getGauge('powerlines_meters').inc(mCachedLength / 100)
     }
     return
   }
 
-  if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/GeneratorBiomass/Build_GeneratorBiomass_Automated')) {
-    metrics.getGauge('generators_biomass').inc()
-    return
-  }
-
-  if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/GeneratorCoal')) {
-    metrics.getGauge('generators_coal').inc()
-    return
-  }
-
-  if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/GeneratorFuel')) {
-    // TODO: should we label by fuel type?
-    metrics.getGauge('generators_fuel').inc()
-    return
-  }
-
-  if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/GeneratorGeoThermal')) {
-    metrics.getGauge('generators_geo').inc()
-    return
-  }
-
+  // Power storage batteries
   if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/PowerStorage')) {
-    metrics.getGauge('storage').inc()
+    if ((object.properties?.mPowerStore as FloatProperty)?.value) {
+      metrics.getGauge('storage_megawatthours').inc((object.properties?.mPowerStore as FloatProperty)?.value)
+    }
     return
   }
 }

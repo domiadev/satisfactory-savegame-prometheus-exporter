@@ -8,8 +8,8 @@ import {
 
 const metrics = new MetricGroup('satisfactory_savegame_conveyors')
   .addGauge(
-    'length',
-    'Total length of conveyor belts & lifts in meters',
+    'meters',
+    'Total length of conveyor belts & lifts in meters, by Mk',
     ['mk'],
   )
 
@@ -23,7 +23,7 @@ export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): vo
     // FYI beltchains also include lifts
     for (const beltInChain of props.beltsInChain) {
       const mk = beltInChain.beltRef.pathName.match(/mk(\d)/i)?.at(1)
-      metrics.getGauge('length').inc({ mk }, (beltInChain.endsAtLength - beltInChain.startsAtLength) / 100)
+      metrics.getGauge('meters').inc({ mk }, (beltInChain.endsAtLength - beltInChain.startsAtLength) / 100)
     }
 
     return

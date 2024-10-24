@@ -7,16 +7,14 @@ import {
 
 const metrics = new MetricGroup('satisfactory_savegame_pipes')
   .addGauge(
-    'networks',
+    'networks_total',
     'Amount of pipe networks',
   )
 
 /* eslint-disable no-useless-return */
 export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): void => {
   if (object.typePath === '/Script/FactoryGame.FGPipeNetwork') {
-    metrics.getGauge('networks').inc()
-
-    // TODO: record the Mk of the pipes in the network
+    metrics.getGauge('networks_total').inc()
 
     // TODO: length metric
 

@@ -5,6 +5,7 @@
       "target": "es2022",
       "esModuleInterop": true,
       "moduleResolution": "node",
+      "resolveJsonModule": true,
       "isolatedModules": true,
 
       "strict": true,
