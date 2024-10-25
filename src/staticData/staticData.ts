@@ -45,5 +45,5 @@ export const pathToRecipe = (path: string): Recipe => {
 }
 
 export const pathToResourceNode = (path: string): ResourceNode => {
-  return staticData.resourceNodes[pathToClassName(path)]
+  return staticData.resourceNodes[path]
 }
