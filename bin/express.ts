@@ -20,7 +20,7 @@ if (!targetLocation) {
 
 const app = express()
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.send(`<html lang="en">
   <head>
     <title>Satisfactory Savegame Prometheus Exporter</title>
@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 `)
 })
 
-app.get('/metrics', (req, res) => {
+app.get('/metrics', (_req, res) => {
   loadLocation(targetLocation)
     .then(extractMetrics)
     // eslint-disable-next-line @typescript-eslint/promise-function-async
@@ -45,6 +45,7 @@ app.get('/metrics', (req, res) => {
       res.end(metricsOutput)
     })
     .catch((err: unknown) => {
+      console.error(err)
       if (err instanceof Error) {
         res.status(500).end(`# ${err.message}`)
       } else {
