@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.1.1](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.1.0...v2.1.1) (2024-10-25)
+
+
+### Bug Fixes
+
+* correct itemsPerCycle for Desc_OilPump_C miner ([b789fbd](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/b789fbd9d468361ee687157491c24a8759b40d83))
+* include production from water extractors ([2777059](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/27770598388e2afc7bef4d3205780287ce4ebd94))
+* log caught errors to console when running in express ([60b5959](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/60b5959e7a558486a1ceeafa1eaee196131304ed))
+* resourceNodes are instances, not classes ([58ccc25](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/58ccc25d66a2d35c2811b33f2ec4743e86cb57c9))
+
 ## [2.1.0](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.0.0...v2.1.0) (2024-10-25)
 
 
