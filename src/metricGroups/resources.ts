@@ -66,9 +66,11 @@ export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): vo
       return
     }
 
-    // TODO: geothermal seems tricky because the resourcenode produces "Desc_Geyser_C" which... is odd
+    // Geothermal generates only power, but their implementation make it seem like they produce "Desc_Geyser_C" which is.. interesting.
     if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/GeneratorGeoThermal/Build_GeneratorGeoThermal')) return
+
     // TODO: fracking is also different, but in its own ✨special✨ way
+    // The smasher is the parent that can be turned on and off, but the extractors are the ones sitting on the nodes (with potentially varying purity?)
     if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/FrackingSmasher')) return
     if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/FrackingExtractor')) return
 
