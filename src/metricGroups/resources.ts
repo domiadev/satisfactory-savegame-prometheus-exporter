@@ -1,10 +1,11 @@
-import { pathToRecipe, staticData } from '../staticData/staticData'
+import { pathToMiner, pathToRecipe, pathToResourceNode, staticData } from '../staticData/staticData'
 import { type Lookups } from '../types/lookups.type'
 import { MetricGroup } from './_MetricGroup'
 import {
   type BoolProperty,
   type FloatProperty,
   isObjectProperty,
+  type ObjectProperty,
   type SaveComponent,
   type SaveEntity,
 } from '@etothepii/satisfactory-file-parser'
@@ -50,12 +51,26 @@ export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): vo
   }
 
   // TODO: include resource extraction as production
-  // if (object.properties?.mExtractableResource && object.typePath.includes('Miner')) {}
-  // miner equivalent, should have mExtractableResource
-  // if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/OilPump')) {}
-  // no sure if it has mExtractableResource
+  if (object.properties?.mExtractableResource) {
+    const resource = pathToResourceNode((object.properties.mExtractableResource as ObjectProperty).value.pathName)
+    if (!resource) throw new Error('Resource not found: ' + (object.properties.mExtractableResource as ObjectProperty).value.pathName)
+
+    const item = staticData.items[resource.item]
+    if (!item) throw new Error('Item not found: ' + resource.item)
+
+    const miner = pathToMiner(object.typePath)
+    if (!miner) throw new Error('Miner not found: ' + object.typePath)
+
+    const extractionPerSecond = miner.itemsPerCycle / miner.extractCycleTime
+    const clockSpeed =
+      (object.properties?.mCurrentPotential as FloatProperty)?.value ??
+      (object.properties?.mPendingPotential as FloatProperty)?.value ??
+      1
+    metrics.getGauge('production_per_second').inc({ item: item.name }, extractionPerSecond * resource.purity * clockSpeed)
+  }
+  // TODO: no sure if frackers or oilpumps have mExtractableResource
+  // TODO: Waterpumps arent in staticData.miners
   // if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/WaterPump')) {}
-  // not sure what frackers are called
 }
 /* eslint-enable no-useless-return */
 

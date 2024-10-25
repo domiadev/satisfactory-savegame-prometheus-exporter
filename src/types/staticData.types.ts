@@ -70,14 +70,14 @@ export interface Color {
 }
 
 export interface Miners {
-  Desc_OilPump_C: Desc
-  Desc_MinerMk2_C: Desc
-  Desc_FrackingExtractor_C: Desc
-  Desc_MinerMk3_C: Desc
-  Desc_MinerMk1_C: Desc
+  Desc_OilPump_C: Miner
+  Desc_MinerMk2_C: Miner
+  Desc_FrackingExtractor_C: Miner
+  Desc_MinerMk3_C: Miner
+  Desc_MinerMk1_C: Miner
 }
 
-export interface Desc {
+export interface Miner {
   className: string
   allowedResources: string[]
   allowLiquids: boolean
