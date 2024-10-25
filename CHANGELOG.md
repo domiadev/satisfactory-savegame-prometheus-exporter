@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.0.0...v2.1.0) (2024-10-25)
+
+
+### Features
+
+* track extraction from resourcenodes ([a0c3e14](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/a0c3e14cc40bc5c886b90740f50c38471cfb2585))
+
+
+### Bug Fixes
+
+* whoops. forgot to include the resource node list ([566ef92](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/566ef92113e4da02f1186aa10480c1a0c0bd6597))
+
 ## [2.0.0](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v1.0.0...v2.0.0) (2024-10-24)
 
 
