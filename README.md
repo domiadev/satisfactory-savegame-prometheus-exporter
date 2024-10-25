@@ -2,8 +2,8 @@
 
 A Prometheus Exporter that generates metrics from local or remote Satisfactory save game files.
 
-[ ![npm version](https://img.shields.io/npm/v/satisfactory-savegame-prometheus-exporter.svg?style=flat) ](https://npmjs.org/package/satisfactory-savegame-prometheus-exporter "View this project on npm") [ ![Docker Image Version](https://img.shields.io/docker/v/sleavely/satisfactory-savegame-prometheus-exporter)
-](https://hub.docker.com/r/sleavely/satisfactory-savegame-prometheus-exporter) [ ![Issues](https://img.shields.io/github/issues/Sleavely/satisfactory-savegame-prometheus-exporter.svg) ](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/issues)
+[ ![npm version](https://img.shields.io/npm/v/satisfactory-savegame-prometheus-exporter.svg?style=flat) ](https://npmjs.org/package/satisfactory-savegame-prometheus-exporter "View this project on npm") [ ![Docker Image Version](https://img.shields.io/docker/v/sleavely/satisfactory-savegame-prometheus-exporter?label=Docker)
+](https://hub.docker.com/r/sleavely/satisfactory-savegame-prometheus-exporter) [ ![Issues](https://img.shields.io/github/issues/Sleavely/satisfactory-savegame-prometheus-exporter.svg?label=Github+issues) ](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/issues)
 
 ## Usage
 
@@ -12,19 +12,18 @@ The `SAVEGAME_LOCATION` environment variable can be a URL or a local path to a f
 While you can run the `bin` scripts with `npm exec cli <savegamelocation>` or `npm exec express <savegamelocation>`, the recommended approach is to use Docker as shown below.
 
 ```sh
-docker build -t satisfactory-savegame-prometheus-exporter .
 docker run \
   --rm \
   -p 9772:9772 \
   -e SAVEGAME_LOCATION=https://example.com/satisfactory-savegame.sav \
-  satisfactory-savegame-prometheus-exporter
+  sleavely/satisfactory-savegame-prometheus-exporter:latest
 ```
 
 With Docker Compose:
 
 ```yaml
   savegame_metrics_exporter:
-    build: https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter.git
+    image: sleavely/satisfactory-savegame-prometheus-exporter:latest
     restart: unless-stopped
     volumes:
       - ./config/saved/server:/savegames:ro
