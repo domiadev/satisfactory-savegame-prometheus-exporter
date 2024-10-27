@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.1.1...v2.2.0) (2024-10-27)
+
+
+### Features
+
+* `satisfactory_savegame_buildings_lightweight_total` metric ([0c015d2](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/0c015d22fc2983a38c9e68c7e4f45ba73b6cb75c))
+
 ## [2.1.1](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.1.0...v2.1.1) (2024-10-25)
 
 
