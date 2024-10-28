@@ -38,6 +38,10 @@ With Docker Compose:
     hostname: satisfactory-savegame-metrics
 ```
 
+## Grafana Dashboard
+
+[grafana.json](./grafana.json) contains a dashboard configuration for metrics using this exporter in tandem with [`Shinigami92/satisfactory-server-prometheus-exporter`](https://github.com/Shinigami92/satisfactory-server-prometheus-exporter)
+
 ## Related
 
 - [wolveix/satisfactory-server](https://github.com/wolveix/satisfactory-server) - A Docker image for running a Satisfactory Dedicated Server.
