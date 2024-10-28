@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.2.0...v2.2.1) (2024-10-28)
+
+
+### Bug Fixes
+
+* include resource consumption from generators ([c57d30e](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/c57d30e446c9a73a016e94935d76ce0fa1ddcfb4))
+
 ## [2.2.0](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.1.1...v2.2.0) (2024-10-27)
 
 
