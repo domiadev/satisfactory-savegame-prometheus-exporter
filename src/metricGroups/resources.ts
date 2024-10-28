@@ -93,8 +93,6 @@ export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): vo
   // #endregion
 
   // #region Generator consumption
-  // TODO: water consumption in e.g. generators isnt included yet. Should look at waterToPowerRatio on the generators staticData
-  // TODO: none of the generators consumption seems to be included yet. e.g. Coal
   if (object.properties?.mCurrentFuelClass) {
     const generator = pathToGenerator(object.typePath)
     if (!generator) return // Its a vehicle. Or a jetpack. Or one of the players are drinking fuel.
