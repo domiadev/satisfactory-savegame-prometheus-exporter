@@ -1,4 +1,4 @@
-import { pathToMiner, pathToRecipe, pathToResourceNode, staticData } from '../staticData/staticData'
+import { pathToGenerator, pathToItem, pathToMiner, pathToRecipe, pathToResourceNode, staticData } from '../staticData/staticData'
 import { type Lookups } from '../types/lookups.type'
 import { MetricGroup } from './_MetricGroup'
 import {
@@ -92,7 +92,33 @@ export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): vo
   }
   // #endregion
 
+  // #region Generator consumption
   // TODO: water consumption in e.g. generators isnt included yet. Should look at waterToPowerRatio on the generators staticData
+  // TODO: none of the generators consumption seems to be included yet. e.g. Coal
+  if (object.properties?.mCurrentFuelClass) {
+    const generator = pathToGenerator(object.typePath)
+    if (!generator) return // Its a vehicle. Or a jetpack. Or one of the players are drinking fuel.
+
+    const fuel = pathToItem((object.properties.mCurrentFuelClass as ObjectProperty).value.pathName)
+    if (!fuel) throw new Error('Fuel not found: ' + (object.properties.mCurrentFuelClass as ObjectProperty).value.pathName)
+
+    const clockSpeed =
+      (object.properties?.mCurrentPotential as FloatProperty)?.value ??
+      (object.properties?.mPendingPotential as FloatProperty)?.value ??
+      1
+
+    const fuelPerSecond = 1 / (fuel.energyValue / (generator.powerProduction * clockSpeed))
+    metrics.getGauge('consumption_per_second').inc({ item: fuel.name }, fuelPerSecond)
+
+    const water = staticData.items.Desc_Water_C
+    if (generator.className === 'Desc_GeneratorCoal_C') {
+      metrics.getGauge('consumption_per_second').inc({ item: water.name }, (45 / 60) * clockSpeed)
+    }
+    if (generator.className === 'Desc_GeneratorNuclear_C') {
+      metrics.getGauge('consumption_per_second').inc({ item: water.name }, (240 / 60) * clockSpeed)
+    }
+  }
+  // #endregion
 }
 /* eslint-enable no-useless-return */
 
