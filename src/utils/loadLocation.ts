@@ -32,7 +32,7 @@ export const loadLocation = async (location: string): Promise<ArrayBuffer> => {
   // If its a directory, grab the latest file in it
   const pathStat = await stat(localPath)
   if (pathStat.isDirectory()) {
-    localPath = await getLastModifiedFile(localPath, true, (file) => file.endsWith('.sav'))
+    localPath = await getLastModifiedFile(localPath, true, (file) => file.endsWith('.sav') && !file.includes('ServerManager_V2'))
     if (LOG_LEVEL === 'debug') console.log(`Reading savefile from ${localPath}`)
   }
 
