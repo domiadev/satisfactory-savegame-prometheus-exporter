@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.2](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.2.1...v2.2.2) (2024-11-17)
+
+
+### Bug Fixes
+
+* dont treat ServerManager_V2.sav as a savegame ([0da389d](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/0da389d30175c55b3953018c067db90998d58a7f))
+
 ## [2.2.1](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.2.0...v2.2.1) (2024-10-28)
 
 
