@@ -38,6 +38,33 @@ With Docker Compose:
     hostname: satisfactory-savegame-metrics
 ```
 
+On Windows you can mount your savegame directory by referring to `%LocalAppData%`, like this:
+
+```sh
+docker run \
+  --rm \
+  -p 9772:9772 \
+  -v %LocalAppData%\FactoryGame\Saved\SaveGames\:/savegames:ro \
+  -e SAVEGAME_LOCATION=/savegames \
+  sleavely/satisfactory-savegame-prometheus-exporter:latest
+```
+
+Then, in your Prometheus configuration `scrape_configs`:
+
+```yaml
+  - job_name: "satisfactory-savegame-exporter"
+    # How often metrics will be collected.
+    # Recommended value is half of your autosave interval.
+    scrape_interval: 5m
+    static_configs:
+      # Only one of these targets is really necessary, but it depends on
+      # how you've configured networking for the exporter container and Prometheus.
+      - targets:
+        - 'localhost:9772'
+        - 'host.docker.internal:9772'
+        - 'satisfactory-savegame-metrics:9772'
+```
+
 ## Grafana Dashboard
 
 [grafana.json](./grafana.json) contains a dashboard configuration for metrics using this exporter in tandem with [`Shinigami92/satisfactory-server-prometheus-exporter`](https://github.com/Shinigami92/satisfactory-server-prometheus-exporter)
