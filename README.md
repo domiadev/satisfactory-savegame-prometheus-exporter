@@ -65,6 +65,12 @@ Then, in your Prometheus configuration `scrape_configs`:
         - 'satisfactory-savegame-metrics:9772'
 ```
 
+For local development we rely on [`tsx`](https://tsx.is/) to skip the build step. Simply call `npm run dev` with your savegame location as an argument:
+
+```sh
+npm run dev /mnt/c/Users/potato/AppData/Local/FactoryGame/Saved/SaveGames/
+```
+
 ## Grafana Dashboard
 
 [grafana.json](./grafana.json) contains a dashboard configuration for metrics using this exporter in tandem with [`Shinigami92/satisfactory-server-prometheus-exporter`](https://github.com/Shinigami92/satisfactory-server-prometheus-exporter)
