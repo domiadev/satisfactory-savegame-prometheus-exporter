@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.3](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.2.2...v2.2.3) (2024-12-07)
+
+
+### Bug Fixes
+
+* **parser:** ignore undefined recipes ([5f42123](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/5f421230d31bb19847a219f2a007a4a7cbd4e172))
+
 ## [2.2.2](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.2.1...v2.2.2) (2024-11-17)
 
 
