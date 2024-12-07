@@ -39,6 +39,10 @@ export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): vo
 
     const recipe = pathToRecipe(object.properties.mCurrentRecipe.value.pathName)
 
+    if (recipe === undefined) {
+      return
+    }
+
     for (const ingredient of recipe.ingredients) {
       const item = staticData.items[ingredient.item]
       metrics.getGauge('consumption_per_second').inc({ item: item.name }, (ingredient.amount / recipe.time) * clockSpeed)
