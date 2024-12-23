@@ -65,5 +65,7 @@ COPY --from=build /app/dist ./dist
 # Expose the port that the application listens on.
 EXPOSE 9772
 
+ENV NODE_OPTIONS=--enable-source-maps
+
 # Run the web server
 CMD ["npm", "exec", "express"]

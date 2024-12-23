@@ -23,7 +23,7 @@
   "scripts": {
     "dev": "tsx --no-warnings --watch-path=./bin --watch-path=./src ./bin/cli.ts",
     "prebuild": "rm -rf dist",
-    "build": "esbuild --bundle --platform=node --packages=external --outdir=./dist/ ./bin/*.ts",
+    "build": "esbuild --bundle --platform=node --packages=external --sourcemap --outdir=./dist/ ./bin/*.ts",
     "test": "eslint src/ && tsc --noEmit && npm run build"
   },
   "devDependencies": {
