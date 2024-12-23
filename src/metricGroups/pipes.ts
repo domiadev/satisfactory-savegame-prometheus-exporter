@@ -1,27 +1,57 @@
 import { MetricGroup } from './_MetricGroup'
 import { type Lookups } from '../types/lookups.type'
 import {
+  type ArrayProperty,
+  type StructProperty,
   type SaveComponent,
   type SaveEntity,
 } from '@etothepii/satisfactory-file-parser'
+import { getDistance } from '../utils/spatialMath'
+import { pathToBuilding } from '../staticData/staticData'
 
 const metrics = new MetricGroup('satisfactory_savegame_pipes')
   .addGauge(
     'networks_total',
     'Amount of pipe networks',
   )
+  .addGauge(
+    'meters',
+    'Total length of pipes in meters, by Mk',
+    ['mk'],
+  )
 
-/* eslint-disable no-useless-return */
 export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): void => {
   if (object.typePath === '/Script/FactoryGame.FGPipeNetwork') {
     metrics.getGauge('networks_total').inc()
+  }
 
-    // TODO: length metric
+  if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/Pipeline')) {
+    const building = pathToBuilding(object.typePath)
+    if (!building) return
+    if (![
+      'Desc_Pipeline_C',
+      'Desc_PipelineMK2_C',
+      'Desc_PipelineMK2_NoIndicator_C',
+      'Desc_Pipeline_NoIndicator_C',
+    ].includes(building.className)) return
 
-    // TODO: can we easily measure flow rates or volumes of different fluids?
+    const mk = building.className.match(/mk(\d)/i)?.at(1) ?? '1'
+
+    const { totalLength: pipeLength } = (object.properties?.mSplineData as ArrayProperty<StructProperty>)?.values
+      ?.reduce<{ totalLength: number, previousPoint: StructProperty | null }>(({ totalLength, previousPoint }, splinePoint) => {
+      return {
+        totalLength: totalLength + (
+          previousPoint
+            ? getDistance(previousPoint.value.properties.Location.value, splinePoint.value.properties.Location.value) / 100
+            : 0
+        ),
+        previousPoint: splinePoint,
+      }
+    }, { totalLength: 0, previousPoint: null })
+
+    metrics.getGauge('meters').inc({ mk }, pipeLength)
   }
 }
-/* eslint-enable no-useless-return */
 
 export {
   metrics as pipesMetrics,
