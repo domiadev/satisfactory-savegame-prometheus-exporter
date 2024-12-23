@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.0](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.2.3...v2.3.0) (2024-12-23)
+
+
+### Features
+
+* satisfactory_savegame_pipes_meters ([80f6f76](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/80f6f76c76f975114e8bd0cdeae92bbafff32486))
+* satisfactory_savegame_trains_total and satisfactory_savegame_trains_tracks_meters ([17783df](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/17783df3037770732bca572e495a372ee7b104e6))
+
 ## [2.2.3](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.2.2...v2.2.3) (2024-12-07)
 
 
