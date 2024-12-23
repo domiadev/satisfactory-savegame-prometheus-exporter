@@ -10,6 +10,7 @@ import { awesomeMetrics, awesomeParser } from './metricGroups/awesome'
 import { pipesMetrics, pipesParser } from './metricGroups/pipes'
 import { buildingsMetrics, buildingsParser } from './metricGroups/buildings'
 import { resourcesMetrics, resourcesParser } from './metricGroups/resources'
+import { trainsMetrics, trainsParser } from './metricGroups/trains'
 
 export const extractMetrics = async (arrayBuffer: ArrayBuffer): Promise<Registry> => {
   const register = Registry.merge([
@@ -19,6 +20,7 @@ export const extractMetrics = async (arrayBuffer: ArrayBuffer): Promise<Registry
     pipesMetrics.register,
     powerMetrics.register,
     resourcesMetrics.register,
+    trainsMetrics.register,
   ])
 
   register.resetMetrics()
@@ -46,6 +48,7 @@ export const extractMetrics = async (arrayBuffer: ArrayBuffer): Promise<Registry
       pipesParser(object, lookups)
       powerParser(object, lookups)
       resourcesParser(object, lookups)
+      trainsParser(object, lookups)
     }
   }
 
