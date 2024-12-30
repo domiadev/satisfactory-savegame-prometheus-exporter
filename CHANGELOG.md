@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.2](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.3.1...v2.3.2) (2024-12-30)
+
+
+### Bug Fixes
+
+* Include resource wells in `satisfactory_savegame_resources_production_per_second` ([71666c6](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/71666c6d7aad47b730bb8af30de2c7d2400f3794))
+
 ## [2.3.1](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.3.0...v2.3.1) (2024-12-23)
 
 
