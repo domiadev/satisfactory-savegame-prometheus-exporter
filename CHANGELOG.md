@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.1](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.3.0...v2.3.1) (2024-12-23)
+
+
+### Bug Fixes
+
+* expect objects with mBaseProduction to not always be a resolvable building ([c4da6fc](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/c4da6fc0ff0c051c8ee0adf0e01bc75a389a758c))
+
 ## [2.3.0](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.2.3...v2.3.0) (2024-12-23)
 
 
