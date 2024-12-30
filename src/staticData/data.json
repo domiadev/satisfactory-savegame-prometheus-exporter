@@ -41320,7 +41320,7 @@
             ],
             "allowLiquids": true,
             "allowSolids": false,
-            "itemsPerCycle": 1000,
+            "itemsPerCycle": 1,
             "extractCycleTime": 1.0
         },
         "Desc_MinerMk3_C": {

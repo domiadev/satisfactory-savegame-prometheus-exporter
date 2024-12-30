@@ -73,15 +73,18 @@ export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): vo
     // Geothermal generates only power, but their implementation make it seem like they produce "Desc_Geyser_C" which is.. interesting.
     if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/GeneratorGeoThermal/Build_GeneratorGeoThermal')) return
 
-    // TODO: fracking is also different, but in its own ✨special✨ way
-    // The smasher is the parent that can be turned on and off, but the extractors are the ones sitting on the nodes (with potentially varying purity?)
+    // Fracking is also different, but in its own ✨special✨ way
+    // The smasher is the parent that can be turned on and off,
+    // but the FrackingExtractors are the ones sitting on the nodes which we know the resources for.
     if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/FrackingSmasher')) return
-    if (object.typePath.startsWith('/Game/FactoryGame/Buildable/Factory/FrackingExtractor')) return
+    // TODO: Currently, the resourceNodes.ts file doesn't have a mapping of what fracking satellites belong to which core
+    // and its not readily available in the parsed entity, so we cant account for overclocking of the parent smasher
 
     const resource = pathToResourceNode((object.properties.mExtractableResource as ObjectProperty).value.pathName)
     if (!resource) throw new Error('Resource not found: ' + (object.properties.mExtractableResource as ObjectProperty).value.pathName)
 
-    const item = staticData.items[resource.item]
+    // Oil frackers claim to extract "Desc_LiquidOilWell_C" but the actual resource is "Desc_LiquidOil_C" (Crude Oil)
+    const item = staticData.items[resource.item.replace('Well_C', '_C')]
     if (!item) throw new Error('Item not found: ' + resource.item)
 
     const miner = pathToMiner(object.typePath)
