@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.4.0](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.3.2...v2.4.0) (2025-01-13)
+
+
+### Features
+
+* satisfactory_savegame_trains_current_speed ([1eb1cbd](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/1eb1cbded709ac1d1ee1e99f43762bd026fde5df))
+
+
+### Bug Fixes
+
+* dont log errors from locomotives regenerative brakes ([6026ded](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/6026ded779264c0ee750379b3eebdd07744de131))
+
 ## [2.3.2](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.3.1...v2.3.2) (2024-12-30)
 
 
