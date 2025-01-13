@@ -38,9 +38,7 @@ export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): vo
     // powerInfo belonging to a geyser, i.e. Desc_GeneratorGeoThermal_C
     const building = pathToBuilding(lookups.byInstance.get(object.parentEntityName)?.typePath ?? '')
     if (!building) {
-      // This happens sometimes but haven't figured out why.
-      // It seems transient because the next autosave will usually not encounter it.
-      console.error('A non-building with mBaseProduction was encountered', object)
+      // Locomotives have regenerative brakes, but lets not include it in the power production metrics
       return
     }
     metrics.getGauge('generators_total').inc({ building: building.name })
