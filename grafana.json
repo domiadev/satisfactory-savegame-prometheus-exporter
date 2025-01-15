@@ -511,6 +511,8 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 200,
+            "axisSoftMin": 0,
             "barAlignment": 0,
             "barWidthFactor": 0.6,
             "drawStyle": "line",
@@ -566,7 +568,7 @@
               "options": {
                 "mode": "exclude",
                 "names": [
-                  "p95"
+                  "p90"
                 ],
                 "prefix": "All except:",
                 "readOnly": true
@@ -630,6 +632,23 @@
           },
           "editorMode": "code",
           "exemplar": false,
+          "expr": "satisfactory_savegame_trains_current_speed{quantile=\"0.9\", sessionName=\"$sessionName\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "p90",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "adhocFilters": [],
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
           "expr": "satisfactory_savegame_trains_current_speed{quantile=\"0.95\", sessionName=\"$sessionName\"}",
           "format": "time_series",
           "hide": false,
@@ -654,6 +673,7 @@
             "fixedColor": "dark-green",
             "mode": "shades"
           },
+          "fieldMinMax": false,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -661,14 +681,9 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
-          },
-          "unit": "short"
+          }
         },
         "overrides": []
       },
@@ -692,7 +707,7 @@
           "fields": "",
           "values": false
         },
-        "showPercentChange": false,
+        "showPercentChange": true,
         "textMode": "auto",
         "wideLayout": true
       },
@@ -704,8 +719,8 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "satisfactory_savegame_awesome_points{sessionName=\"$sessionName\"}",
+          "editorMode": "code",
+          "expr": "avg_over_time(deriv(satisfactory_savegame_awesome_points{sessionName=\"$sessionName\"}[15m])[60m:])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "{{sessionName}}",
@@ -714,7 +729,7 @@
           "useBackend": false
         }
       ],
-      "title": "AWESOME points collected",
+      "title": "AWESOME points per second",
       "type": "stat"
     },
     {
@@ -1468,6 +1483,6 @@
   "timezone": "browser",
   "title": "Satisfactory",
   "uid": "bdxsh3zg8bzeoe",
-  "version": 53,
+  "version": 56,
   "weekStart": ""
 }
