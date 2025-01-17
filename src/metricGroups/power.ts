@@ -28,12 +28,23 @@ const metrics = new MetricGroup('satisfactory_savegame_power')
     ['building'],
   )
   .addGauge(
+    'consumption_megawatts',
+    'World-wide power consumption in MW',
+  )
+  .addGauge(
     'storage_megawatthours',
     'Total amount of MWh remaining in all batteries',
   )
 
 /* eslint-disable no-useless-return */
 export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): void => {
+  // Anything that consumes power, such as trains, buildings, etc.
+  // Exclude droppods since they are not (usually) connected to the network
+  const consumptionMegawatts = !object.parentEntityName.includes('DropPod') && (object?.properties?.mTargetConsumption as FloatProperty)?.value
+  if (consumptionMegawatts) {
+    metrics.getGauge('consumption_megawatts').inc(consumptionMegawatts)
+  }
+
   if (object.properties?.mBaseProduction) {
     // powerInfo belonging to a geyser, i.e. Desc_GeneratorGeoThermal_C
     const building = pathToBuilding(lookups.byInstance.get(object.parentEntityName)?.typePath ?? '')
