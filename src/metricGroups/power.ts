@@ -64,8 +64,6 @@ export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): vo
 
     if ((powerInfo.properties?.mDynamicProductionCapacity as FloatProperty)?.value) {
       metrics.getGauge('production_megawatts').inc({ building: building.name }, (powerInfo.properties?.mDynamicProductionCapacity as FloatProperty).value)
-    } else {
-      metrics.getGauge('production_megawatts').inc({ building: building.name }, generator.powerProduction)
     }
   }
 
