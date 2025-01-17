@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.1](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.4.0...v2.4.1) (2025-01-17)
+
+
+### Bug Fixes
+
+* power is only generated when mDynamicProductionCapacity is present ([1b8536a](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/1b8536a5a0b91eff5be45c1619d1f8211b082b06))
+
 ## [2.4.0](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.3.2...v2.4.0) (2025-01-13)
 
 
