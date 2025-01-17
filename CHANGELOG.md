@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.4.1...v2.5.0) (2025-01-17)
+
+
+### Features
+
+* satisfactory_savegame_power_consumption_megawatts ([eed190c](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/commit/eed190c8d5ab4c8f54c25441a6f073d619e11dd3))
+
 ## [2.4.1](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.4.0...v2.4.1) (2025-01-17)
 
 
