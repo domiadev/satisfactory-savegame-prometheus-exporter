@@ -1,5 +1,49 @@
 # Changelog
 
+## [3.0.0](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/compare/v2.5.0...v3.0.0) (2025-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Many metrics have been removed and are now generically tracked in `satisfactory_savegame_buildings_total`
+* prepare for 1.0
+
+### Features
+
+* `satisfactory_savegame_buildings_lightweight_total` metric ([0c015d2](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/0c015d22fc2983a38c9e68c7e4f45ba73b6cb75c))
+* label belt segments by Mk ([dc2840e](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/dc2840e75c16b4ee580ae037ebacf239e23b41c5))
+* Many metrics have been removed and are now generically tracked in `satisfactory_savegame_buildings_total` ([bdb5efe](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/bdb5efeaeb9bd90ee03abe91b8d314346c7eaad1))
+* Power production is `satisfactory_savegame_power_production_megawatts` ([bdb5efe](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/bdb5efeaeb9bd90ee03abe91b8d314346c7eaad1))
+* prepare for 1.0 ([c6a8590](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/c6a85908795620a99c1abbd69d5623f589e0034b))
+* Resource throughput in `satisfactory_savegame_resources_consumption_per_second` and `satisfactory_savegame_resources_production_per_second` ([bdb5efe](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/bdb5efeaeb9bd90ee03abe91b8d314346c7eaad1))
+* satisfactory_savegame_pipes_meters ([80f6f76](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/80f6f76c76f975114e8bd0cdeae92bbafff32486))
+* satisfactory_savegame_power_consumption_megawatts ([eed190c](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/eed190c8d5ab4c8f54c25441a6f073d619e11dd3))
+* satisfactory_savegame_trains_current_speed ([f5bf053](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/f5bf0535983aa392330c304cd281e1e41263f980))
+* satisfactory_savegame_trains_current_speed ([1eb1cbd](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/1eb1cbded709ac1d1ee1e99f43762bd026fde5df))
+* satisfactory_savegame_trains_total and satisfactory_savegame_trains_tracks_meters ([17783df](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/17783df3037770732bca572e495a372ee7b104e6))
+* Stored MWh in `satisfactory_savegame_power_storage_megawatthours` ([bdb5efe](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/bdb5efeaeb9bd90ee03abe91b8d314346c7eaad1))
+* track extraction from resourcenodes ([a0c3e14](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/a0c3e14cc40bc5c886b90740f50c38471cfb2585))
+
+
+### Bug Fixes
+
+* correct itemsPerCycle for Desc_OilPump_C miner ([b789fbd](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/b789fbd9d468361ee687157491c24a8759b40d83))
+* dont log errors from locomotives regenerative brakes ([6026ded](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/6026ded779264c0ee750379b3eebdd07744de131))
+* dont treat ServerManager_V2.sav as a savegame ([0da389d](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/0da389d30175c55b3953018c067db90998d58a7f))
+* expect objects with mBaseProduction to not always be a resolvable building ([c4da6fc](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/c4da6fc0ff0c051c8ee0adf0e01bc75a389a758c))
+* expose lookup-maps to the parsers ([96667cb](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/96667cb99afd3eb5ce6b8069f12e37c1f6ed7282))
+* include production from water extractors ([2777059](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/27770598388e2afc7bef4d3205780287ce4ebd94))
+* include resource consumption from generators ([c57d30e](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/c57d30e446c9a73a016e94935d76ce0fa1ddcfb4))
+* Include resource wells in `satisfactory_savegame_resources_production_per_second` ([71666c6](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/71666c6d7aad47b730bb8af30de2c7d2400f3794))
+* log caught errors to console when running in express ([60b5959](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/60b5959e7a558486a1ceeafa1eaee196131304ed))
+* only print resolved file in dir when LOG_LEVEL is debug ([cc26725](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/cc26725876761777342a9db401399b2b54ec07ee))
+* **parser:** ignore undefined recipes ([941e6cc](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/941e6cce145b7c89222b7dd93b6c51c1d08a6432))
+* **parser:** ignore undefined recipes ([5f42123](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/5f421230d31bb19847a219f2a007a4a7cbd4e172))
+* power is only generated when mDynamicProductionCapacity is present ([1b8536a](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/1b8536a5a0b91eff5be45c1619d1f8211b082b06))
+* resourceNodes are instances, not classes ([58ccc25](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/58ccc25d66a2d35c2811b33f2ec4743e86cb57c9))
+* When loading from a directory, only filenames ending in `.sav` will be considered. ([bdb5efe](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/bdb5efeaeb9bd90ee03abe91b8d314346c7eaad1))
+* whoops. forgot to include the resource node list ([566ef92](https://github.com/domiadev/satisfactory-savegame-prometheus-exporter/commit/566ef92113e4da02f1186aa10480c1a0c0bd6597))
+
 ## [2.5.0](https://github.com/Sleavely/satisfactory-savegame-prometheus-exporter/compare/v2.4.1...v2.5.0) (2025-01-17)
 
 
