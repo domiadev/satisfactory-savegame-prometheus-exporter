@@ -54,6 +54,6 @@ jobs:
         with:
           pull: true
           push: true
-          tags: sleavely/satisfactory-savegame-prometheus-exporter:v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }},sleavely/satisfactory-savegame-prometheus-exporter:latest
+          tags: domiadev/satisfactory-savegame-prometheus-exporter:v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }},domiadev/satisfactory-savegame-prometheus-exporter:latest
         if: ${{ steps.release.outputs.release_created }}
 
