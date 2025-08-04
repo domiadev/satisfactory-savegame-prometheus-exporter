@@ -31,7 +31,7 @@ export const parser = (object: SaveComponent | SaveEntity, lookups: Lookups): vo
       for (const buildable of object.specialProperties.buildables) {
         // Because there are so many variations of walls and foundations, we group them.
         // E.g. '/Game/FactoryGame/Buildable/Building/Wall/FicsitWallSet/Build_Wall_Orange_8x1.Build_Wall_Orange_8x1_C'
-        const category = buildable.typePath.split('/')[5]
+        const category = buildable.typeReference.pathName.split('/')[5]
         metrics.getGauge('lightweight_total').inc({ building: category }, buildable.instances.length)
       }
     }

@@ -28,15 +28,15 @@
   },
   "devDependencies": {
     "@sleavely/eslint-config": "^1.0.1",
-    "@types/express": "^4.17.21",
-    "@types/node": "^22.7.7",
-    "esbuild": "^0.24.0",
-    "tsx": "^4.19.2",
-    "typescript": "^5.6.3"
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.1.0",
+    "esbuild": "^0.25.8",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@etothepii/satisfactory-file-parser": "^1.1.1",
-    "express": "^4.21.1",
+    "@etothepii/satisfactory-file-parser": "^3.0.2",
+    "express": "^5.1.0",
     "prom-client": "^15.1.3"
   }
 }
